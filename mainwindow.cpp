@@ -7,6 +7,11 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Retimer");
+
+    ui->cCbb->setCurrentIndex(RT_GCT);
+    ui->mCbb->setCurrentIndex(RT_GMT);
+    ui->aCbb->setCurrentIndex(RT_NOW);
 
     getMdl = new QFileSystemModel(this);
 //    getMdl->setRootPath(QDir::currentPath());
@@ -33,29 +38,35 @@ void MainWindow::dragEnterEvent(QDragEnterEvent *e)
 
 void MainWindow::dropEvent(QDropEvent *e)
 {
-    QString dF = e->mimeData()->urls().first().toLocalFile();
+    QString dF = e->mimeData()->urls().first().toLocalFile();   // drop file path
     if (e->pos().x() < this->width()/2)
     {
-        getRP = dF;
+        getRP = dF; // Root Path
         getMdl->setRootPath(getRP);
         ui->getTree->setModel(getMdl);
         ui->getTree->setRootIndex(getMdl->index(getRP));
+        ui->getTree->setColumnHidden(2,true);
+        ui->getTree->setColumnWidth(0,250);
     }
     else
     {
-        setRP = dF;
+        setRP = dF; // Root Path
         setMdl->setRootPath(setRP);
         ui->setTree->setModel(setMdl);
         ui->setTree->setRootIndex(setMdl->index(setRP));
+        ui->setTree->setColumnHidden(2,true);
+        ui->setTree->setColumnWidth(0,250);
     }
 }
 
+// Get/Set file path, Create/Modify/Access time retime type
 void MainWindow::retime(QString g, QString s, int c, int m, int a)
 {
     if (!c && !m && !a)
     {
         return;
     }
+    // Get/Set file HanDLe
     HANDLE gHDL = CreateFileA((LPCSTR)g.toLocal8Bit(),\
                               GENERIC_READ,0,NULL,OPEN_EXISTING,0,0);
     HANDLE sHDL = CreateFileA((LPCSTR)s.toLocal8Bit(),\
@@ -66,9 +77,14 @@ void MainWindow::retime(QString g, QString s, int c, int m, int a)
         CloseHandle(sHDL);
         return;
     }
-    FILETIME gCT,gMT,gAT,sCT,sMT,sAT;
+    // Get/Set/Now Create/Modify/Access/File Time
+    FILETIME gCT,gMT,gAT,sCT,sMT,sAT,nFT;
+    // Now System Time
+    SYSTEMTIME nST;
     GetFileTime(gHDL,&gCT,&gAT,&gMT);
     GetFileTime(sHDL,&sCT,&sAT,&sMT);
+    GetSystemTime(&nST);
+    SystemTimeToFileTime(&nST,&nFT);
     switch (c) {
     case RT_GCT:
         SetFileTime(sHDL,&gCT,0,0);
@@ -87,6 +103,9 @@ void MainWindow::retime(QString g, QString s, int c, int m, int a)
         break;
     case RT_SAT:
         SetFileTime(sHDL,&sAT,0,0);
+        break;
+    case RT_NOW:
+        SetFileTime(sHDL,&nFT,0,0);
         break;
     default:
         break;
@@ -110,6 +129,9 @@ void MainWindow::retime(QString g, QString s, int c, int m, int a)
     case RT_SAT:
         SetFileTime(sHDL,0,&sAT,0);
         break;
+    case RT_NOW:
+        SetFileTime(sHDL,0,&nFT,0);
+        break;
     default:
         break;
     }
@@ -132,6 +154,9 @@ void MainWindow::retime(QString g, QString s, int c, int m, int a)
     case RT_SAT:
         SetFileTime(sHDL,0,0,&sAT);
         break;
+    case RT_NOW:
+        SetFileTime(sHDL,0,0,&nFT);
+        break;
     default:
         break;
     }
@@ -140,18 +165,23 @@ void MainWindow::retime(QString g, QString s, int c, int m, int a)
 }
 
 
+
 void MainWindow::on_ConvertBtn_clicked()
 {
+    // Create/Modify/Access Retime Type
+    int cRT = ui->cCbb->currentIndex();
+    int mRT = ui->mCbb->currentIndex();
+    int aRT = ui->aCbb->currentIndex();
     QDirIterator sItr(setRP,QDir::Files|QDir::NoDotAndDotDot);
     while(sItr.hasNext())
     {
         sItr.next();
+        // Set/Get File path
         QString sF = sItr.filePath();
         QString gF = getRP+'/'+sItr.fileName();
         if (QFile::exists(gF))
         {
-            qDebug() << gF << sF;
-            retime(gF,sF,RT_GCT,RT_SCT);
+            retime(gF,sF,cRT,mRT,aRT);
         }
     }
 }

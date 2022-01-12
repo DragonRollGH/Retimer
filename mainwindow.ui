@@ -46,42 +46,139 @@
      <widget class="QTreeView" name="getTree"/>
     </item>
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QVBoxLayout" name="vLyt">
       <item>
-       <widget class="QPushButton" name="pushButton">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>10</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>PushButton</string>
-        </property>
-        <property name="autoDefault">
-         <bool>false</bool>
-        </property>
+       <widget class="QComboBox" name="cCbb">
+        <item>
+         <property name="text">
+          <string>Create</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>-&gt; Create</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>-&gt; Modify</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>-&gt; Access</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Create &lt;-</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Modify &lt;-</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Access &lt;-</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Now</string>
+         </property>
+        </item>
        </widget>
       </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QComboBox" name="mCbb">
+        <item>
+         <property name="text">
+          <string>Modify</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>-&gt; Create</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>-&gt; Modify</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>-&gt; Access</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Create &lt;-</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Modify &lt;-</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Access &lt;-</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Now</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="aCbb">
+        <item>
+         <property name="text">
+          <string>Access</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>-&gt; Create</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>-&gt; Modify</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>-&gt; Access</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Create &lt;-</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Modify &lt;-</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Access &lt;-</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Now</string>
+         </property>
+        </item>
+       </widget>
+      </item>
       <item>
        <widget class="QPushButton" name="ConvertBtn">
         <property name="sizePolicy">
@@ -92,23 +189,6 @@
         </property>
         <property name="text">
          <string>Convert</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="maximumSize">
-         <size>
-          <width>10</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>PushButton</string>
         </property>
        </widget>
       </item>

@@ -31,9 +31,9 @@ private:
     Ui::MainWindow *ui;
     QFileSystemModel *getMdl;
     QFileSystemModel *setMdl;
-    QString getRP;
+    QString getRP;  // Root Path
     QString setRP;
-
+    // Get/Set Create/Modify/Access Time
     enum RetimeType{
         RT_ORIGIN,
         RT_GCT,
@@ -42,7 +42,8 @@ private:
         RT_SCT,
         RT_SMT,
         RT_SAT,
-        RT_NOW
+        RT_NOW,
+        RT_CUSTOM
     };
     void retime(QString g,QString s,int c=0,int m=0,int a=0);
 };
