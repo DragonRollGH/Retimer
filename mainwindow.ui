@@ -43,10 +43,21 @@
      <number>18</number>
     </property>
     <item>
-     <widget class="QTreeView" name="getTree"/>
+     <layout class="QVBoxLayout" name="getLyt">
+      <item>
+       <widget class="QLabel" name="getLbl">
+        <property name="text">
+         <string>Get</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTreeView" name="getTree"/>
+      </item>
+     </layout>
     </item>
     <item>
-     <layout class="QVBoxLayout" name="vLyt">
+     <layout class="QVBoxLayout" name="midLyt">
       <item>
        <widget class="QComboBox" name="cCbb">
         <item>
@@ -180,7 +191,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="ConvertBtn">
+       <widget class="QPushButton" name="cvtBtn">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -192,10 +203,34 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QPushButton" name="argBtn">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Arrange</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
     <item>
-     <widget class="QTreeView" name="setTree"/>
+     <layout class="QVBoxLayout" name="setLyt">
+      <item>
+       <widget class="QLabel" name="setLbl">
+        <property name="text">
+         <string>Set</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTreeView" name="setTree"/>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>

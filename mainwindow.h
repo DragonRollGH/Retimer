@@ -7,6 +7,7 @@
 #include <QDragEnterEvent>
 #include <QDropEvent>
 #include <QMimeData>
+#include <QDateTime>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,7 +26,9 @@ protected:
     void dropEvent(QDropEvent *e);
 
 private slots:
-    void on_ConvertBtn_clicked();
+    void on_cvtBtn_clicked();
+
+    void on_argBtn_clicked();
 
 private:
     Ui::MainWindow *ui;

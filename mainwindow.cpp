@@ -47,6 +47,7 @@ void MainWindow::dropEvent(QDropEvent *e)
         ui->getTree->setRootIndex(getMdl->index(getRP));
         ui->getTree->setColumnHidden(2,true);
         ui->getTree->setColumnWidth(0,250);
+        ui->getLbl->setText(getRP);
     }
     else
     {
@@ -56,6 +57,7 @@ void MainWindow::dropEvent(QDropEvent *e)
         ui->setTree->setRootIndex(setMdl->index(setRP));
         ui->setTree->setColumnHidden(2,true);
         ui->setTree->setColumnWidth(0,250);
+        ui->setLbl->setText(setRP);
     }
 }
 
@@ -164,9 +166,7 @@ void MainWindow::retime(QString g, QString s, int c, int m, int a)
     CloseHandle(sHDL);
 }
 
-
-
-void MainWindow::on_ConvertBtn_clicked()
+void MainWindow::on_cvtBtn_clicked()
 {
     // Create/Modify/Access Retime Type
     int cRT = ui->cCbb->currentIndex();
@@ -184,4 +184,25 @@ void MainWindow::on_ConvertBtn_clicked()
             retime(gF,sF,cRT,mRT,aRT);
         }
     }
+    setMdl->setRootPath(QDir::currentPath());
+    setMdl->setRootPath(setRP);
 }
+
+void MainWindow::on_argBtn_clicked()
+{
+    QDirIterator sItr(setRP,QDir::Files|QDir::NoDotAndDotDot);
+    while(sItr.hasNext())
+    {
+        sItr.next();
+        // Create DateTime
+        QDateTime cDT = sItr.fileInfo().birthTime();
+        // New file Path
+        QString nP = setRP+'/'+cDT.toString("yyMMd");
+        if (!QDir(nP).exists())
+        {
+            QDir().mkdir(nP);
+        }
+        QFile::rename(sItr.filePath(),nP+'/'+sItr.fileName());
+    }
+}
+
