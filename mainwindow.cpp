@@ -195,9 +195,10 @@ void MainWindow::on_argBtn_clicked()
     {
         sItr.next();
         // Create DateTime
-        QDateTime cDT = sItr.fileInfo().birthTime();
+//        QDateTime cDT = sItr.fileInfo().birthTime();  // not exactly birthtime, but the time copy to pc
+        QDateTime cDT = sItr.fileInfo().lastModified();
         // New file Path
-        QString nP = setRP+'/'+cDT.toString("yyMMd");
+        QString nP = setRP+'/'+cDT.toString("yyMMdd");
         if (!QDir(nP).exists())
         {
             QDir().mkdir(nP);
